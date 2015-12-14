@@ -1,6 +1,6 @@
 <?php
 
-//获取借款列表的小弟弟
+//获取借款列表的小弟弟  cts
 function getTMemberList($search=array(),$size=''){
 	$pre = C('DB_PREFIX');
 	$map['m.is_transfer'] = '1';
