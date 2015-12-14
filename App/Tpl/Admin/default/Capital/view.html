@@ -1,0 +1,30 @@
+<tagLib name="htmlA" />
+<div class="so_main">
+
+<div class="page_tit">我要融资</div>
+<div class="form2" style="width: 450px;">
+	<div id="tab_1">
+	
+	<dl class="lineD"><dt>姓名：</dt>
+
+		<dd>{$data.title}</dd></dl>
+	<dl class="lineD"><dt>手机号：</dt>
+		<dd>{$data.phone}</dd></dl>
+	<dl class="lineD"><dt>用户名：</dt>
+		<dd>
+			<if condition="$data['uid']">
+
+			<htmlA:user id="data.uid" uname="data.username" />
+
+			<else/>
+				游客
+			</if>
+
+		</dd></dl>
+	<dl class="lineD"><dt>备注：</dt>
+		<dd  style="width:250px; height:100px; overflow:auto;">{$data.contxt}</dd></dl>
+		<dl class="lineD"><dt>添加时间：</dt>
+			<dd>{$data.dateline|date='Y-m-d H:i:s',###}</dd></dl>
+	
+	</div><!--tab1-->
+</div>

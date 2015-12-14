@@ -1,0 +1,174 @@
+<style>
+.biao_box{overflow:hidden; clear:both;}
+.biao_box dl{overflow:hidden;border-bottom:1px dashed #e2e2e2;padding-bottom:5px;margin-bottom:0px;margin-top:5px; clear:both;}
+.biao_box dl dt{ float:left;width:166px;text-align:right; line-height:26px;font-size:14px;}
+.biao_box dl dd{ float:left; margin-left:10px;font-size:14px; line-height:26px;}
+.biao_box dl dd input[type="text"]{ float:left;line-height:26px;width:350px;border:1px solid #ccc;color:#333;padding:2px;height:26px;font-size:14px;}
+.biao_box dl dd select{ float:left;font-size:14px;border:1px solid #ccc;}
+.page_btm .btn_b{background:#f59a03;border: 0 none;width: 60px;height: 24px;color: #fff;  margin-top:20px;font-size:12px;cursor:pointer;}
+</style>
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+
+<div class="so_main">
+<div class="page_tit"></div>
+<div class="biao_box">
+<form action="__URL__/doedit" method="POST" name="myfrom" enctype="multipart/form-data">
+<input type="hidden" name="e_id" value="{$Think.get.e_id}">
+<dl>
+	<dt>名称:</dt>
+	<dd><input class="lineD" type="text" name="name" value="{$find.name}"></dd>
+</dl>
+<dl>
+	<dt>logo：</dt>
+	<dd><input type="file" name="logo" ></dd>
+	<dd><img src="__ROOT__/{$find.logo}"></dd>
+</dl>
+<dl>
+	<dt>简介:</dt>
+	<dd><input type="text" name="intro" value="{$find.intro}"></dd>
+</dl>
+<dl>
+	<dt>贷款类型:</dt>
+	<dd><select name="type">
+		<option value=''>--请选择贷款类型--</option>
+		<foreach name="type" item="v1" key="k">
+		<if condition="$find.type eq $k ">
+			<option value="{$k}" id="{$k}" selected>{$v1}</option>
+		<else /> <option value="{$k}" id="{$k}">{$v1}</option>
+			</if>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>产品名称:</dt>
+	<dd><input  class="lineD"   type="text" name="brandname" value="{$find.brandname}"></dd>
+</dl>
+<dl>
+	<dt>金额:</dt>
+	<dd><input  class="lineD"  type="text" name="money" value="{$find.money}" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>最大金额:</dt>
+	<dd><input  class="lineD"  type="text" name="money_max" value="{$find.money_max}" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>最小金额:</dt>
+	<dd><input  class="lineD"  type="text" name="money_min" value="{$find.money_min}">&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>期限:</dt>
+	<dd><input  class="lineD"  type="text" name="deadline" value="{$find.deadline}">&nbsp;月</dd>
+</dl>
+<dl>
+	<dt>最大期限:</dt>
+	<dd><input  class="lineD"  type="text" name="deadline_max" value="{$find.deadline_max}">&nbsp;月</dd>
+</dl>
+<dl>
+	<dt>最小期限:</dt>
+	<dd><input  class="lineD"  type="text" name="deadline_min" value="{$find.deadline_min}">&nbsp;月</dd>
+</dl>
+<dl>
+	<dt>月供:</dt>
+	<dd><input   class="lineD"  type="text" name="monthly" value="{$find.monthly}">&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>贷款类型:</dt>
+	<dd><select name="repayment_type">
+		<option value="">--还款类型--</option>
+		<foreach name="repayment_type" item="v2" key="k2">
+		<if condition="$find.repayment_type eq $k2 ">
+			<option value="{$k2}" id="{$k2}" selected>{$v2}</option>
+			<else /> <option value="{$k2}" id="{$k2}">{$v2}</option>
+			</if>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>总费用:</dt>
+	<dd><input  class="lineD"  type="text" name="total_cost" value="{$find.total_cost}" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>费用说明:</dt>
+	<dd><input  class="lineD"  type="text" name="shuoming" value="{$find.shuoming}"></dd>
+</dl>
+<dl>
+	<dt>放款时间:</dt>
+	<dd><input  class="lineD"  type="text" name="loan_time" value="{$find.loan_time}"></dd>
+</dl>
+<dl>
+	<dt>要求：</dt>
+	<dd><input type="text" name="intro" value="{$find.intro}"></dd>
+</dl>
+<dl>
+	<dt>职业身份:</dt>
+	<dd><select name="identity">
+		<option value="">--职业身份--</option>
+		<foreach name="identity" item="v3" key="k3">
+		<if condition="$find.identity eq $k3 ">
+			<option value="{$k3}" id="{$k3}" selected>{$v3}</option>
+			<else /> <option value="{$k3}" id="{$k3}">{$v3}</option>
+			</if>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>本地房产:</dt>
+	<dd><select name="house">
+		<option value="">--本地房产--</option>
+		<foreach name="house" item="v4" key="k4">
+		<if condition="$find.house eq $k4 ">
+		<option value="{$k4}" id="{$k4}" selected>{$v4}</option>
+			<else /> <option value="{$k4}" id="{$k3}">{$v4}</option>
+			</if>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>是否有车:</dt>
+	<dd><select name="vehicle">
+		<option value="">--是否有车--</option>
+		<foreach name="vehicle" item="v5" key="k5">
+		<if condition="$find.vehicle eq $k5 ">
+			<option value="{$k5}" id="{$k5}" selected>{$v5}</option>
+			<else /> <option value="{$k5}" id="{$k5}">{$v5}</option>
+			</if>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>信用记录:</dt>
+	<dd><select name="credit">
+		<option value="">--信用记录--</option>
+		<foreach name="credit" item="v6" key="k6">
+		<if condition="$find.credit eq $k6 ">
+			<option value="{$k6}" id="{$k6}" selected>{$v6}</option>
+			<else /> <option value="{$k6}" id="{$k6}">{$v6}</option>
+			</if>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>优势：</dt>
+	<dd><input  class="lineD"  type="text" name="strength" value="{$find.strength}"></dd>
+</dl>
+<dl>
+	<dt>月费率：</dt>
+	<dd><input  class="lineD"  type="text" name="yuefei"  value="{$find.yuefei}">&nbsp;%</dd>
+</dl>
+<dl>
+	<dt>成功申请率：</dt>
+	<dd><input  class="lineD"  type="text" name="chenggong"  value="{$find.chenggong}">%</dd>
+</dl>
+<dl>
+	<dt>产品详情：</dt>
+	<dd><include file="./Style/Editor/kissy.html" />
+		<htmlA:editor id="art_content" name="art_content" w='780px' type='kissy' value="{$find.details}"/></dd>
+</dl>
+
+<div class="page_btm">
+<input type="submit" value="提交" class="btn_b">
+</div>
+</form>
+</div>
+<include file="Public:_footer" />

@@ -1,0 +1,137 @@
+<div class="communication-system">
+	<ul class="toolbar" id="toolbar">
+		<li id="Account" class="active">账户通讯</li>
+		<li id="Address">具体通讯</li>
+		<li id="Group">节日通讯</li>
+		<li id="Records">通讯记录</li>
+	</ul>
+	<ul class="item" id="item">
+		<li style="display:block;" id="Account-item">
+			<form id="Account-form" action="__URL__/msgByAccount">
+				<div class="item-c">
+					<h2>通迅方式</h2>
+					<div>
+						<label for="account-type-checkbox-1"><input type="checkbox" name="type[0]" value="1" id="account-type-checkbox-1" />&nbsp;&nbsp;短信</label>
+						<label for="account-type-checkbox-3">
+							<input type="checkbox" name="type[1]" value="2" id="account-type-checkbox-3" />&nbsp;&nbsp;邮件
+						</label>
+						<label for="account-type-checkbox-5">
+							<input type="checkbox" name="type[2]" value="3" id="account-type-checkbox-5" checked="checked" />&nbsp;&nbsp;站内信
+						</label>
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>用户名</h2>
+					<div>
+						<input type="text" name="user_name" class="normal" value="{$userName}" />
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>标题</h2>
+					<div>
+						<input type="text" name="title" class="normal long" />
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>发送内容</h2>
+					<div>
+						<textarea name="content" class="normal"></textarea>
+					</div>
+				</div>
+			</form>
+		</li>
+		<li id="Address-item">
+			<form id="Address-form" action="__URL__/msgByAddress">
+				<div class="item-c">
+					<h2>邮件地址</h2>
+					<div>
+						<input type="text" name="user_email" class="normal" />
+					</div>
+				</div>
+				<div class="item-c"><h2>手机号码</h2><div><input type="text" name="user_phone" class="normal" /></div></div>
+				<div class="item-c">
+					<h2>标题</h2>
+					<div>
+						<input type="text" name="title" class="normal long" />
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>发送内容</h2>
+					<div>
+						<textarea name="content" class="normal"></textarea>
+					</div>
+				</div>
+			</form>
+		</li>
+		<li id="Group-item">
+			<form id="Group-form" action="__URL__/msgByGroup">
+				<div class="item-c">
+					<h2>选择用户组</h2>
+					<div>
+						<label for="group-type-radio-1">
+							<input type="radio" name="user_group" value="1" id="group-type-radio-1" checked="checked" />&nbsp;&nbsp;所有会员
+						</label>
+						<label for="group-type-radio-2">
+							<input type="radio" name="user_group" value="2" id="group-type-radio-2" />&nbsp;&nbsp;vip会员
+						</label>
+						<label for="group-type-radio-3">
+							<input type="radio" name="user_group" value="3" id="group-type-radio-3" />&nbsp;&nbsp;非vip会员
+						</label>
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>通迅方式</h2>
+					<div>
+						<label for="group-type-checkbox-1"><input type="checkbox" name="type[0]" value="1" id="group-type-checkbox-1" />&nbsp;&nbsp;短信</label>
+						<label for="group-type-checkbox-2">
+							<input type="checkbox" name="type[1]" value="2" id="group-type-checkbox-2" />&nbsp;&nbsp;邮件
+						</label>
+						<label for="group-type-checkbox-3">
+							<input type="checkbox" name="type[2]" value="3" id="group-type-checkbox-3" checked="checked" />&nbsp;&nbsp;站内信
+						</label>
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>标题</h2>
+					<div>
+						<input type="text" name="title" class="normal long" />
+					</div>
+				</div>
+				<div class="item-c">
+					<h2>发送内容</h2>
+					<div>
+						<textarea name="content" class="normal"></textarea>
+					</div>
+				</div>
+			</form>
+		</li>
+		<li id="Records-item">
+			<table id="record-list"></table>
+		</li>
+	</ul>
+</div>
+<script type="text/javascript">
+$(function (){
+var toolbar_ = document.getElementById('toolbar').children,
+	item_ = document.getElementById('item').children,
+	length_ = toolbar_.length;
+	for(var i=0; i<length_; i++){
+		toolbar_[i].onclick = function (){
+			for(var ii=0; ii<length_; ii++){
+				toolbar_[ii].className = '';
+				item_[ii].style.display = 'none';
+			}
+			
+			this.className = 'active';
+			communication_system.activeTagId = this.id;
+			document.getElementById(this.id+'-item').style.display = 'block';
+			if(this.id == 'Records'){
+				artDialog.list.communication_system.button({name: '确认并发送', disabled: true});
+			}else{
+				artDialog.list.communication_system.button({name: '确认并发送', disabled: false});
+			}
+		};
+	}
+	communication_system.initTable();
+});
+</script>

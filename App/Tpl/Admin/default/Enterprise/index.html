@@ -1,0 +1,93 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">金融合作列表</div>
+ <div class="Toolbar_inbox">
+    <div class="pages" style="float:right; padding:0px;"></div>
+    <a  class="btn_a" href = "__URL__/add"><span class="search_action">添加</span></a>
+  </div>
+  <div class="list">
+<table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0" >
+	<tr>
+	<th class="line_l">e_id</th>
+	<th class="line_l">企业名字</th>
+	<th class="line_l">要求</th>
+	<th class="line_l">贷款类型</th>
+	
+	<th class="line_l">产品名称</th>
+	<th class="line_l">金额</th>
+	<th class="line_l">最大金额</th>
+	<th class="line_l">最小金额</th>
+	<th class="line_l">期限</th>
+	<th class="line_l">最大期限</th>
+	<th class="line_l">最小期限</th>
+	<th class="line_l">月供</th>
+	<th class="line_l">还款方式</th>
+	<th class="line_l">总费用</th>
+	<th class="line_l">放款时间</th>
+	<th class="line_l">费用说明</th>
+	
+	<th class="line_l">操作</th>
+
+	</tr>
+	<foreach name="select" item="vo">
+		<tr>
+			<td>{$vo.e_id}</td>
+			<td>{$vo.name}</td>
+			<td>{$vo.intro}</td>
+			<!--<td>{$vo.type}</td>-->
+			<switch name="vo.type" >
+			<case value="1"><td>装修贷</td></case>
+			<case value="2"><td>购车贷</td></case>
+			<case value="3"><td>旅游贷</td></case>
+			<case value="4"><td>教育贷</td></case>
+			<case value="5"><td>购房贷</td></case>
+			<case value="6"><td>企业贷</td></case>
+			<default /><td>装修贷</td>
+			</switch>
+
+			
+			<td>{$vo.brandname}</td>
+			<td>{$vo.money}元</td>
+			<td>{$vo.money_max}元</td>
+			<td>{$vo.money_min}元</td>
+			<td>{$vo.deadline}月</td>
+			<td>{$vo.deadline_max}月</td>
+			<td>{$vo.deadline_min}月</td>
+			<td>{$vo.monthly}元</td>
+		<switch name="vo.repayment_type" >
+			<case value="1"><td>按天到期还款</td></case>
+			<case value="2"><td>等额本息</td></case>
+			<case value="3"><td>按季分期还款</td></case>
+			<case value="4"><td>按月付息,到期还本</td></case>
+			<case value="5"><td>一次性还款</td></case>
+			<default /><td>按天</td>
+			</switch>
+
+
+
+			<td>{$vo.total_cost}元</td>
+			<td>{$vo.loan_time}日</td>
+			<td>{$vo.shuoming}</td>
+			
+			<td><a href = "__URL__/edit/e_id/{$vo.e_id}">详情</a>|<a href = "__URL__/del/e_id/{$vo.e_id}">删除</a></td>
+		</tr>
+
+	</foreach>
+	
+
+</table>
+
+  </div>
+   <div class="Toolbar_inbox">
+  	<div class="page right">{$page}</div>
+   <a  class="btn_a" href = "__URL__/add"><span class="search_action">添加</span></a>
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

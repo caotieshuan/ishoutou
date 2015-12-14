@@ -1,0 +1,23 @@
+  <div id="search_div" style="display:none">
+  	<div class="page_tit"><script type="text/javascript">document.write(searchName);</script> [ <a href="javascript:void(0);" onclick="dosearch();">隐藏</a> ]</div>
+	
+	<div class="form2">
+	<form method="post" action="__URL__/transaction">
+
+   <dl class="lineD">
+      <dt>会员名：</dt>
+      <dd style="text-align:left;">
+        <input name="uname" style="width:190px" id="title" type="text" value="{$search.uname}">
+        <span>不填则不限制</span>
+      </dd>
+    </dl>
+
+	<dl class="lineD"><dt>申请时间(开始)：</dt><dd  style="text-align:left;"><htmlA:timer id="start_time" tip='只选开始时间则查询从开始时间往后所有' arg="{maxDate:'#F{$dp.$D(\\\\'end_time\\\\')||\\\\'2020-10-01\\\\'}',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}"  class="Wdate" value="{$search.start_time|mydate='Y-m-d H:i:s',###}"/></dd></dl>
+	<dl class="lineD"><dt>申请时间(结束)：</dt><dd  style="text-align:left;"><htmlA:timer id="end_time" tip='只选结束时间则查询从结束时间往前所有' arg="{minDate:'#F{$dp.$D(\\\\'start_time\\\\')}',maxDate:'2020-10-01',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true}" class="Wdate" value="{$search.end_time|mydate='Y-m-d H:i:s',###}"/></dd></dl>
+
+    <div class="page_btm"  style="text-align:left;">
+      <input type="submit" class="btn_b" value="确定" />
+    </div>
+	</form>
+  </div>
+  </div>

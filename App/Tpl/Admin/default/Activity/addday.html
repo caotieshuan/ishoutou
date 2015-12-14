@@ -1,0 +1,46 @@
+<include file="Public:_header"/>
+<tagLib name="htmlA"/>
+<div class="so_main">
+
+    <div class="page_tit"><empty name="data.id">添加<else />编辑</empty>9月活动数据</div>
+    <div class="form2">
+        <form method="post" action="__URL__/doAddDay" onsubmit="return subcheck();" enctype="multipart/form-data">
+            <input type="hidden" value="{$vo.id}" name="id">
+            <div>
+                <dl class="lineD">
+                    <dt>数据截稿日期：</dt>
+                    <dd>
+                        <htmlA:input id="art_day" value="{$vo.art_day}" tip="数据截稿日期,请按日期格式填写:例如 2015年8月31日10:30"/>
+                    </dd>
+                </dl>
+                <dl class="lineD">
+                    <dt>每日投标前10名：</dt>
+                    <dd>
+                        <htmlA:text id="art_10" value="{$vo.art_10}" style="width:500px;height:100px;" tip="每日投标前10名,每行一条数据，数据格式例如，姓名1||金额1||奖金1"/>
+                    </dd>
+                </dl>
+                <dl class="lineD">
+                    <dt>当月投标金额前3名：</dt>
+                    <dd>
+                        <htmlA:text id="art_3" value="{$vo.art_3}" style="width:500px;height:100px;" tip="当月投标金额前3名,每行一条数据，数据格式例如，姓名1||金额1"/>
+                    </dd>
+                </dl>
+            </div>
+            <div class="page_btm">
+                <input type="submit" class="btn_b" value="确定"/>
+                <htmlA:commonBtn type="href" action="__URL__/month" value="返回上一步" style="search_action" />
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+function subcheck(){
+    return true;
+}
+</script>
+
+
+
+
+
+<include file="Public:_footer"/>

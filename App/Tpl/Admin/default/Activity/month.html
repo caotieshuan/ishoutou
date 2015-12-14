@@ -1,0 +1,50 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js" language="javascript"></script>
+<script type="text/javascript">
+    var delUrl = '__URL__/doDel';
+    var addUrl = '__URL__/add';
+    var editUrl = '__URL__/edit';
+    var isSearchHidden = 1;
+    var searchName = "搜索提现";
+</script>
+<div class="so_main">
+    <div class="page_tit">自定义活动列表</div>
+    <!--搜索-->
+    <include file="search" />
+    <!--搜索-->
+
+    <div class="Toolbar_inbox">
+        <div class="page right">{$pagebar}</div>
+        <htmlA:commonBtn type="href" action="__URL__/addDay" value="添加数据" style="search_action" />
+    </div>
+    <div class="list">
+        <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th class="line_l">数据截稿时间</th>
+                <th class="line_l">最后更新时间</th>
+                <th class="line_l">操作</th>
+            </tr>
+            <volist id="vo" name="list">
+                <tr overstyle='on' id="list_{$vo.id}">
+                    <td>{$vo.art_day}</td>
+                    <td>{$vo.dateline|date="Y-m-d H:i:s",###}</td>
+                    <td>
+                        <htmlA:commonBtn type="href" action="__URL__/addDay/id/{$vo.id}" value="编辑" style="search_action" />
+                        <htmlA:commonBtn type="href" action="__URL__/DelDay/id/{$vo.id}" value="删除" style="search_action" />
+                    </td>
+                </tr>
+            </volist>
+        </table>
+    </div>
+
+
+
+    <div class="Toolbar_inbox">
+        <div class="page right">{$pagebar}</div>
+        <htmlA:commonBtn type="href" action="__URL__/addDay" value="添加数据" style="search_action" />
+    </div>
+</div>
+
+
+<include file="Public:_footer" />

@@ -1,0 +1,91 @@
+<include file="Public:_header" />
+
+<tagLib name="htmlA" />
+<div class="so_main">
+	<div class="page_tit">发布活期宝</div>
+	<div class="page_tab"><span data="tab_1" class="active">基本信息</span></div>
+	<div class="form2">
+		<form method="post" action="__URL__/doAdd" id="subcheck" enctype="multipart/form-data">
+			<div id="tab_1">
+
+				<dl class="lineD"><dt>活期宝标题：</dt><dd><htmlA:input id="current_name" value="{$vo.current_name}" tip="*"/></dd></dl>
+				<dl class="lineD"><dt>最小购买金额：</dt><dd><htmlA:input id="one_money" value="{$vo.one_money}" tip="*"/></dd></dl>
+				<dl class="lineD"><dt>总购买金额：</dt><dd><htmlA:input id="current_money" value="{$vo.current_money}" tip="*"/></dd></dl>
+				<dl class="lineD"><dt>最大购买金额：</dt><dd><htmlA:input id="max_money" value="{$vo.max_money}" tip="*"/></dd></dl>
+				<dl class="lineD"><dt>起始年利率：</dt><dd><htmlA:input id="interest_rate" value="{$vo.interest_rate}" tip="%"/></dd></dl>
+			</div>	
+			<div class="page_btm">
+			  <input type="submit" class="btn_b" onclick="return Postdata();" value="确定" />
+			</div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+	function Postdata(){
+		
+		var current_name = $("#current_name").val();
+		var one_money = $("#one_money").val();
+		var current_money = $("#current_money").val();
+		var max_money = $("#max_money").val();
+		var interest_rate = $("#interest_rate").val();
+		
+		if(current_name == ''){
+		
+			art.dialog({
+					lock: true,
+					background: '#ccc', // 背景色
+					opacity: 0.87,	// 透明度
+					content: '标题不能为空！',
+					icon: 'error',
+					time:3,
+				});
+				
+			return false;
+		}
+		if(one_money == ''){
+			art.dialog({
+					lock: true,
+					background: '#ccc', // 背景色
+					opacity: 0.87,	// 透明度
+					content: '最小购买金额不能为空！',
+					icon: 'error',
+					time:3,
+				});
+			return false;
+		}
+		if(max_money == ''){
+			art.dialog({
+					lock: true,
+					background: '#ccc', // 背景色
+					opacity: 0.87,	// 透明度
+					content: '最大够偶买金额不能为空！',
+					icon: 'error',
+					time:3,
+				});
+			return false;
+		}
+		if(interest_rate == ''){
+			art.dialog({
+					lock: true,
+					background: '#ccc', // 背景色
+					opacity: 0.87,	// 透明度
+					content: '起始年利率不能为空！',
+					icon: 'error',
+					time:3,
+				});
+			return false;
+		}
+		if(current_money == ''){
+			art.dialog({
+					lock: true,
+					background: '#ccc', // 背景色
+					opacity: 0.87,	// 透明度
+					content: '总购买金额不能为空！',
+					icon: 'error',
+					time:3,
+				});
+			return false;
+		}
+	}
+</script>
+<include file="Public:_footer" />

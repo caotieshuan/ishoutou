@@ -1,0 +1,29 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<div class="so_main">
+  <div class="page_tit">NCIIC实名验证接口管理</div>
+  <div class="page_tab"><span data="tab_1">NCIIC设置</span></div>
+  <div class="form2">
+    <form method="post" action="__URL__/save" onsubmit="return subcheck();" enctype="multipart/form-data">
+      <div id="tab_1">
+        <dl class="lineD">
+          <dt>是否启用：</dt>
+          <dd>
+            <htmlA:radio id="id5[enable]" value="key|id5_config.enable" default="1|是,0|否" />
+          </dd>
+        </dl>
+        <dl class="lineD">
+          <dt>免费使用几次：</dt>
+          <dd>
+            <input class="input" name="id5[nums]" value="{$id5_config.nums}" style="width: 50px;" />(次)
+            如果不限制请留空
+          </dd>
+        </dl>
+      </div>
+      <div class="page_btm">
+        <input type="submit" class="btn_b" value="确定" />
+      </div>
+    </form>
+  </div>
+</div>
+<include file="Public:_footer" />

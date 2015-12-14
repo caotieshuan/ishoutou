@@ -1,0 +1,127 @@
+<include file="Public:_header"/>
+<script type="text/javascript" src="__ROOT__/Style/A/js/pupload2.1/plupload.full.min.js"></script>
+<tagLib name="htmlA"/>
+<div class="so_main">
+
+    <div class="page_tit"><empty name="data.id">添加<else />编辑</empty>自定义活动</div>
+    <div class="form2">
+        <form method="post" action="__URL__/doAddDiy" onsubmit="return subcheck();" enctype="multipart/form-data">
+            <div>
+                <dl class="lineD">
+                    <dt>活动名称：</dt>
+                    <dd>
+                        <htmlA:input id="art_title" tip="活动名称"/>
+                    </dd>
+                </dl>
+                <dl class="lineD">
+                    <dt>活动说明：</dt>
+                    <dd>
+                        <htmlA:text id="art_info" tip="活动说明"/>
+                    </dd>
+                </dl>
+				<dl class="lineD" style="overflow:hidden">
+					<dt>发奖名单：</dt>
+					<dd>
+						<p>
+							<button style="margin-left: 20px;" id="pickfiles" href="javascript:;">选择XLSX文件</button>
+							<span id="filelist" style="margin-left: 20px;display:inline-block;width: 200px;height: 20px;overflow: hidden;line-height: 20px;"></span>
+							<button style=" margin-left: 20px;" type="button" id="uploadfiles">提交上传</button>
+						</p>
+						<p>
+							备注：模板格式：用户名、奖励金额、备注<span id="xlsview"></span><input type="hidden" name="xlspath" id="xlspath" value="">
+						</p>
+					</dd>
+				</dl>
+				<dl style="height: auto">
+					<dt></dt>
+					<dd>
+						<div class="list">
+						<table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th class="line_l">条数</th>
+								<th class="line_l">用户id</th>
+								<th class="line_l">用户名</th>
+								<th class="line_l">奖励金额</th>
+								<th class="line_l">备注</th>
+								<th class="line_l">发奖状态</th>
+							</tr>
+							<tbody id="user_list">
+
+							</tbody>
+						</table>
+							</div>
+					</dd>
+				</dl>
+            </div>
+            <div class="page_btm">
+                <input type="submit" class="btn_b" value="确定"/>
+                <htmlA:commonBtn type="href" action="__URL__/Diy" value="返回上一步" style="search_action" />
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+	(function( $, plupload ) {
+		var uploader = new plupload.Uploader({
+			runtimes : 'html5,flash,html4',
+			browse_button : 'pickfiles',
+			url : '__URL__/UploadXls',
+			flash_swf_url : '__ROOT__/Style/A/js/pupload2.1/Moxie.swf',
+			silverlight_xap_url : '__ROOT__/Style/A/js/pupload2.1/Moxie.xap',
+			filters : {
+				max_file_size : '5mb', mime_types: [
+					{title : "xlsx,xls", extensions : "xlsx,xls"}
+				]
+			},
+			multi_selection:false,
+			init: {
+				PostInit: function() {
+					document.getElementById('filelist').innerHTML = '';
+					document.getElementById('uploadfiles').onclick = function() {
+						uploader.start();
+						return false;
+					};
+				},
+
+				FilesAdded: function(up, files) {
+					plupload.each(files, function(file) {
+						document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
+					});
+				},
+
+				FileUploaded:function( up, file, re ){
+					var result = $.parseJSON( re.response );
+					document.getElementById('filelist').innerHTML = '';
+					if(result.data.code>0) {
+						console.log(result.data);
+						alert(result.data.msg);
+					}else{
+						var arr = result.data.res;
+						$('#xlsview').html(result.data.xlspath);
+						$('#xlspath').val(result.data.xlspath);
+						var h = '';
+//						var len = $("#user_list tr").length;
+						var len = 0;
+						for(var i=0;i<arr.length;i++){
+							len++;
+							var p = arr[i];
+							h += '<tr> <td>'+len+'</td> <td>'+ p.uid +'</td> <td>'+ p.name +'</td><td>'+ p.prize +'</td><td>'+ p.adesc +'</td><td>新添加</td> </tr>';
+							$('#user_list').html(h)
+						}
+					}
+				},
+				UploadProgress: function(up, file) {
+					document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+				},
+
+				Error: function(up, err) {
+					document.getElementById('console').innerHTML += "\nError #" + err.code + ": " + err.message;
+				}
+			}
+		});
+		uploader.init();
+	})( jQuery, plupload );
+
+</script>
+<include file="Public:_footer"/>

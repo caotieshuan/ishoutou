@@ -1,0 +1,71 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript">
+    var delUrl = '__URL__/doDel';
+    var addUrl = '__URL__/add';
+    var isSearchHidden = 1;
+</script>
+<div class="so_main">
+  <div class="page_tit">活期理财</div>
+<!--搜索/筛选会员-->
+  <include file="search" />
+<!--搜索/筛选会员-->
+
+  <div class="Toolbar_inbox">
+      <div class="page right">{$page}</div>
+    <a href="javascript:/*DQ*/;" class="btn_a"><span class="search_action">已完成活期理财</span></a>
+
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+
+    <th class="line_l">ID</th>
+    <th class="line_l">买入金额</th>
+    <th class="line_l">买入日期</th>
+    <th class="line_l">起始利率</th>
+    <th class="line_l">订单号</th>
+    <th class="line_l">已获收益</th>
+    <th class="line_l">操作</th>
+
+  </tr>
+  <volist id="vo" name="list">
+      <tr>
+        <td>{$vo.id}</td>
+        <td>{$vo.buy_money}元</td>
+        <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>
+        <td>{$vo.interest_rate}%</td>
+        <td>{$vo.order}</td>
+        <td>{:profit($vo['add_time'],$vo['interest_rate'],$vo['buy_money'])}</td> 
+        <td><a href="javascript:/*DQ*/;" onclick="doextraction({$vo.id},{:profit($vo['add_time'],$vo['interest_rate'],$vo['buy_money'])});">审核</a></td> 
+      </tr>
+  </volist>
+  </table>
+
+  </div>
+  
+  <div class="Toolbar_inbox" style="overflow: hidden;">
+      <div class="page right">{$page}</div>
+  </div>
+</div>
+<script type="text/javascript">
+	function doextraction(id,interest){
+	
+		$.post("__URL__/doextraction",{'id':id,'interest':interest},function(html){
+
+			$.artDialog({
+				title:'审核活期理财提取',
+				content:html,
+				ok:function(){
+					$("#actionpost").submit();
+				},
+				cancelVal: '关闭',
+				cancel: true,
+			});
+		});
+	
+	}
+</script>
+
+<include file="Public:_footer" />

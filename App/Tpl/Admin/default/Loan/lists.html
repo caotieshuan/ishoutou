@@ -1,0 +1,42 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">快速申请列表</div>
+ <div class="Toolbar_inbox">
+    <div class="pages" style="float:right; padding:0px;"></div>
+     <a  class="btn_a" href= "#"><span class="search_action">&nbsp;&nbsp; </span></a>
+  </div>
+  <div class="list">
+<table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	<th class="line_l">id</th>
+	<th class="line_l">借款人姓名</th>
+	<th class="line_l">手机号</th>
+	<th class="line_l">贷款金额</th>
+	<th class="line_l">时间</th>	
+	<th class="line_l">操作</th>
+	</tr>
+<foreach name="list" item="vo">
+	<tr>
+	<td>{$vo.id}</td>
+	<td>{$vo.name}</td>
+	<td>{$vo.phone}</td>
+	<td>{$vo.money}</td>
+	<td><php>echo date("Y年m月d日",$vo['add_time']);</php></td>	
+	<td><a href = "__URL__/kdel/id/{$vo.id}">删除<a></td>
+	</tr>
+</foreach>
+</table>
+</div>
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$page}</div>
+   <a  class="btn_a" href = "#"><span class="search_action">&nbsp;&nbsp; </span></a>
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />

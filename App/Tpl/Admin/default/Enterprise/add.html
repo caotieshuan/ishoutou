@@ -1,0 +1,146 @@
+<style>
+.biao_box{overflow:hidden; clear:both;}
+.biao_box dl{overflow:hidden;border-bottom:1px dashed #e2e2e2;padding-bottom:5px;margin-bottom:0px;margin-top:5px; clear:both;}
+.biao_box dl dt{ float:left;width:166px;text-align:right; line-height:26px;font-size:14px;}
+.biao_box dl dd{ float:left; margin-left:10px;font-size:14px; line-height:26px;	}
+.biao_box dl dd input[type="text"]{ float:left;line-height:26px;width:350px; color:#333;padding:2px;height:26px;font-size:14px;}
+.biao_box dl dd select{ float:left;font-size:14px;}
+.page_btm .btn_b{background:#f59a03;border: 0 none;width: 60px;height: 24px;color: #fff; margin-left:176px; margin-top:20px;font-size:12px;cursor:pointer;}
+</style>
+<tagLib name="htmlA" />
+<div class="biao_box">
+<form action="__URL__/doadd" method="POST" name="myfrom" enctype="multipart/form-data">
+
+<dl>
+	<dt>名称:</dt>
+	<dd><input type="text" name="name"></dd>
+</dl>
+<dl>
+	<dt>img：</dt>
+	<dd><input type="file" name="login"></dd>
+</dl>
+<dl>
+	<dt>贷款类型:</dt>
+	<dd><select name="type">
+		<option value=''>--请选择贷款类型--</option>
+		<foreach name="type" item="v1" key="k">
+			<option value="{$k}" id="{$k}">{$v1}</option>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>产品名称:</dt>
+	<dd><input type="text" name="brandname" ></dd>
+</dl>
+<dl>
+	<dt>金额:</dt>
+	<dd><input type="text" name="money" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>最大金额:</dt>
+	<dd><input type="text" name="money_max" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>最小金额:</dt>
+	<dd><input type="text" name="money_min" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>期限:</dt>
+	<dd><input type="text" name="deadline" >&nbsp;月</dd>
+</dl>
+<dl>
+	<dt>最大期限:</dt>
+	<dd><input type="text" name="deadline_max" >&nbsp;月</dd>
+</dl>
+<dl>
+	<dt>最小期限:</dt>
+	<dd><input type="text" name="deadline_min" >&nbsp;</dd>
+</dl>
+<dl>
+	<dt>月供:</dt>
+	<dd><input type="text" name="monthly" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>贷款类型:</dt>
+	<dd><select name="repayment_type">
+		<option value="">--还款类型--</option>
+		<foreach name="repayment_type" item="v2" key="k2">
+			<option value="{$k2}" id="{$k2}">{$v2}</option>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>总费用:</dt>
+	<dd><input type="text" name="total_cost" >&nbsp;元</dd>
+</dl>
+<dl>
+	<dt>费用说明:</dt>
+	<dd><input type="text" name="shuoming" ></dd>
+</dl>
+<dl>
+	<dt>放款时间:</dt>
+	<dd><input type="text" name="loan_time" >&nbsp;工作日</dd>
+</dl>
+<dl>
+	<dt>要求：</dt>
+	<dd><input type="text" name="intro"></dd>
+</dl>
+<dl>
+	<dt>职业身份:</dt>
+	<dd><select name="identity">
+		<option value=''>--请选择职业身份--</option>
+		<foreach name="identity" item="v3" key="k3">
+			<option value="{$k3}" id="{$k3}">{$v3}</option>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>本地房产:</dt>
+	<dd><select name="house">
+		<option value=''>--请选择本地房产--</option>
+		<foreach name="house" item="v4" key="k4">
+			<option value="{$k4}" id="{$k4}">{$v4}</option>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>是否有车:</dt>
+	<dd><select name="vehicle">
+		<option value=''>--请选择是否有车--</option>
+		<foreach name="vehicle" item="v4" key="k4">
+			<option value="{$k4}" id="{$k4}">{$v4}</option>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>信用记录:</dt>
+	<dd><select name="credit">
+		<option value=''>--请选择信用记录--</option>
+		<foreach name="credit" item="v5" key="k5">
+			<option value="{$k5}" id="{$k5}">{$v5}</option>
+		</foreach>
+		</select></dd>
+</dl>
+<dl>
+	<dt>优势：</dt>
+	<dd><input type="text" name="strength"></dd>
+</dl>
+<dl>
+	<dt>月费率：</dt>
+	<dd><input type="text" name="yuefei">&nbsp;%</dd>
+</dl>
+<dl>
+	<dt>成功申请率：</dt>
+	<dd><input type="text" name="chenggong">&nbsp;%</dd>
+</dl>
+<dl style="border-bottom:0;">
+	<dt>产品详情：</dt>
+	<dd><include file="./Style/Editor/kissy.html" />
+		<htmlA:editor id="art_content" name="art_content" w='780px' type='kissy'/></dd>
+</dl>
+
+<div class="page_btm">
+<input type="submit" value="提交" class="btn_b">
+</div>
+</form>
+</div>

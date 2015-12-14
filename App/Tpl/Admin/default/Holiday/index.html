@@ -1,0 +1,159 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<script type="text/javascript" src="__ROOT__/Style/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="__ROOT__/Style/A/js/jquery.artZoom.js"></script>
+<style type="text/css" media="screen">
+  .timeInput_Day {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    height: 15px;
+    margin-right: 4px;
+    padding: 2px;
+    text-align: left;
+    vertical-align: middle;
+    width: 95px;}
+	.Toolbar_inbox ul li {float:left;}
+</style>
+<div class="so_main">
+	
+  <div class="page_tit">会员上传资料管理</div>
+	
+  <include file="search" />
+  <div class="Toolbar_inbox">
+  	<div class="pages" style="float:right; padding:0px;">{$pagebar}</div>
+   <ul>
+		<li style="width: 70px;"><strong>起止日期：</strong> </li>
+		<li style="width: 240px;">
+			<input type="text" id="start_time" value="<php>if($search['start_time']){echo date('Y-m-d',$search['start_time']);}</php>" readonly="readonly" class="Wdate timeInput_Day" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\\'end_time\\\')||\\\'2020-10-01\\\'}'})"/>
+			至
+			<input type="text" value="<php>if($search['end_time']){echo date('Y-m-d',$search['end_time']);}</php>" id="end_time" readonly="readonly" class="Wdate timeInput_Day" onfocus="WdatePicker({minDate:'#F{$dp.$D(\\\'start_time\\\')||\\\'2020-10-01\\\'}'})"/>
+		</li>
+		<li><strong>请输入节假日：</strong><input type="text" id="info" name="info"></li>
+		<li><button id="but" onclick="Postdate()">确定</button></li>
+	</ul>
+
+	<div style="clear:both;"></div>
+	
+  </div>
+  
+  <div class="list">
+  <table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <th style="width:30px;">
+        <input type="checkbox" id="checkbox_handle" onclick="checkAll(this)" value="0">
+        <label for="checkbox"></label>
+    </th>
+    <th class="line_l">ID</th>
+    <th class="line_l">假期开始日</th>
+    <th class="line_l">假期结束日</th>
+    <th class="line_l">节假日说明</th>
+    <th class="line_l">操作</th>	
+  </tr>
+  <volist id="v" name="vo">
+      <tr overstyle='on' id="list_{$vo.id}">
+        <td><input type="checkbox" name="checkbox" id="checkbox2" onclick="checkon(this)" value="{$vo.id}"></td>
+        <td>{$v.id}</td>
+        <td>{$v.from_date|date="Y-m-d",###}</td>       
+        <td>{$v.to_date|date="Y-m-d",###}</td>       
+        <td>{$v.info}</td>       
+        <td><a href="javascript:void(0);" onclick="rom({$v.id})">删除</a></td>
+      </tr>
+  </volist>
+  </table>
+  </div>
+  <div class="Toolbar_inbox">
+  	<div class="pages" style="float:right; padding:0px;">{$pagebar}</div>
+    <htmlA:commonBtn type="jsfun" value="节假日管理" style="search_action" />
+  </div>
+</div>
+<script type="text/javascript" src="/Style/artDialog/jquery.artDialog.source.js?skin=aero"></script>
+<script type="text/javascript">
+	function rom(id){
+		
+		$.artDialog({	
+			content:'确定要删除该日期吗？',
+			ok:function(){
+			
+				$.get("__URL__/delete",{id:id},function(d){						
+					if(d == 'yes'){
+						$.artDialog({
+							icon: 'succeed',
+							time:3,
+							content:'删除成功,3秒后自动关闭'
+							
+						});
+						setTimeout("secondStep()", 3000);
+						
+					}else{
+						$.artDialog({
+							time:3,
+							content:'删除失败,3秒后自动关闭'
+							
+						});
+					}
+				});
+				
+			},
+			cancelVal:'关闭',
+			cancel: true
+		});
+	}
+	function secondStep(){
+		parent.MainIframe.location.reload();
+	}
+	function Postdate(){
+		
+		var start_time = $("#start_time").val();		
+		var end_time = $("#end_time").val();
+		var info = $("#info").val();
+		if(start_time == ''){
+			art.dialog({
+				icon: 'error',
+				time:3,
+				content: '起始时间不能为空！'
+			});
+			return false;
+		}
+		if(start_time == ''){
+			art.dialog({
+				icon: 'error',
+				time:3,
+				content: '截止时间不能为空！'
+			});
+			return false;
+		}
+		if(info == ''){
+			art.dialog({
+				icon: 'error',
+				time:3,
+				content: '节假日说明不能为空！'
+			});
+			return false;
+		}
+		$.get("__URL__/Postdate",{start_time:start_time,end_time,end_time,info:info},function(d){
+			if(d == 'yes'){
+				$.artDialog({
+					content:'添加成功',
+					ok:function(){
+						$("#start_time").val('');
+						$("#end_time").val('');
+						$("#info").val('');
+						parent.MainIframe.location.reload();
+					}
+				});
+				
+			}else{
+				$.artDialog({
+					content:'添加失败！',
+					cancelVal:'关闭',
+					cancel: true
+					
+				});
+			}
+		});
+	}
+	
+</script>
+
+<include file="Public:_footer" />

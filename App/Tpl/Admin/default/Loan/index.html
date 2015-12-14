@@ -1,0 +1,51 @@
+<include file="Public:_header" />
+<tagLib name="htmlA" />
+<div class="so_main">
+<div class="page_tit">贷款申请列表</div>
+ <div class="Toolbar_inbox">
+    <div class="pages" style="float:right; padding:0px;"></div>
+     <a  class="btn_a" href= "#"><span class="search_action">&nbsp;&nbsp; </span></a>
+  </div>
+  <div class="list">
+<table id="area_list" width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	<th class="line_l">id</th>
+	<th class="line_l">企业名字</th>
+	<th class="line_l">姓名</th>
+	<th class="line_l">手机号</th>
+	<th class="line_l">年限</th>
+	<th class="line_l">身份</th>
+	<th class="line_l">是否有本地商品房</th>
+	<th class="line_l">操作</th>
+	</tr>
+	<foreach name="list" item="vo">
+		<tr>
+			<td>{$vo.l_id}</td>
+			<td>{$vo.name}</td>
+			<td>{$vo.person_name}</td>
+			<td>{$vo.person_phone}</td>
+			<td>{$Econfig['YEAR'][$vo['term']]}</td>
+			<td>{$Econfig['IDENTITY'][$vo['person_identity']]}</td>
+			<if condition="$vo.person_house eq 0 ">
+			<td>没有</td>
+			<else /><td>有</td>
+			</if>
+			<td><a href = "__URL__/del/l_id/{$vo.l_id}">删除</a></td>
+		</tr>
+
+	</foreach>
+	
+</table>
+</div>
+  <div class="Toolbar_inbox">
+  	<div class="page right">{$page}</div>
+   <a  class="btn_a" href = "#"><span class="search_action">&nbsp;&nbsp; </span></a>
+  </div>
+</div>
+<script type="text/javascript">
+function showurl(url,Title){
+	ui.box.load(url, {title:Title});
+}
+</script>
+
+<include file="Public:_footer" />
